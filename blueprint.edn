@@ -1,0 +1,11 @@
+[{:itonami.blueprint/social-impact [:worker-safety :public-health :sanitation-continuity]
+  :itonami.blueprint/domain :waste-management/garbage-recycling-collection-route-scheduling-logistics-coordination
+  :itonami.blueprint/required-technologies [:robotics :identity :audit-ledger]
+  :itonami.blueprint/isco-08 "9611"
+  :itonami.blueprint/name "Garbage and Recycling Collection Route Scheduling and Logistics Coordination Practice"
+  :itonami.blueprint/governor :waste-collection-governor
+  :itonami.blueprint/robotics true
+  :db/id -1
+  :itonami.blueprint/status :public-oss
+  :itonami.blueprint/id "cloud-itonami-isco-9611"
+  :itonami.blueprint/license "AGPL-3.0-or-later"}]

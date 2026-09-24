@@ -1,5 +1,5 @@
 (ns wastecollect.actor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [wastecollect.actor :as actor]
             [wastecollect.store :as store]))
 

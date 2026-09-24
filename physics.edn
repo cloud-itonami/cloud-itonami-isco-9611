@@ -1,0 +1,36 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a route scheduling/logistics coordination robot
+;; performs crew scheduling, collection logging and collection-equipment
+;; procurement coordination for a garbage-and-recycling collection crew
+;; (ISCO 9611). It never performs collection work itself. The collection
+;; equipment's physical work it schedules: a kerbside bin-mover robot bringing
+;; a full wheelie bin down/up a driveway to the truck, and the truck's bin
+;; lifter tipping the bin into the hopper.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-9611"
+ :cases
+ [{:id :bin-up-driveway
+   :kind :transport
+   :procedure "bin-mover robot brings a full 240 L wheelie bin (80 kg) 15 m along a driveway to the kerb; driveway grade varied"
+   :params {:mass-kg 40.0 :payload-kg 80.0 :distance-m 15.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 1.0 :drive-force-n 250.0 :crr 0.03
+            :cog-height-m 0.30 :support-half-length-m 0.30 :payload-cog-height-m 0.55
+            :max-time-s 600.0}
+   :sweep {:param :slope-deg :values [0.0 4.0 8.0 10.0 12.0 15.0]}
+   :quantity :cycle-time-s
+   :limit {:max 25.0 :basis "estimate: a bin should reach the kerb within the time the truck takes to service the neighbouring bins"}
+   :boundary {:lo 0.0 :hi 20.0}}
+  {:id :bin-lift-to-hopper
+   :kind :manipulator
+   :procedure "truck-side bin lifter raises a wheelie bin from the kerb to the hopper lip"
+   :params {:l1-m 0.90 :l2-m 0.60 :m1-kg 25.0 :m2-kg 15.0
+            :from [0.80 0.00] :to [0.40 1.20] :duration-s 4.0 :steps 500}
+   :sweep {:param :payload-kg :values [20.0 40.0 60.0 80.0 100.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 1500.0 :basis "estimate: rated torque of a hydraulic rotary bin-lifter drive for 240 L bins"}
+   :boundary {:lo 5.0 :hi 200.0}}]}

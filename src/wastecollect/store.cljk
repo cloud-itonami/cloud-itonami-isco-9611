@@ -1,7 +1,7 @@
 (ns wastecollect.store
   "SSoT for the ISCO-08 9611 garbage-and-recycling-collection-route
   scheduling/logistics coordination actor (itonami actor pattern,
-  ADR-2607121000 / CLAUDE.md Actors section; README's 'Robotics
+  ADR-2607121000 / AGENTS.md Actors section; README's 'Robotics
   premise' — a route scheduling/logistics coordination robot performs
   crew scheduling, collection-log/progress-record logging and
   collection-equipment/consumables procurement coordination for a
